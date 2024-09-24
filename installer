@@ -2,13 +2,23 @@
 
 SELF=$0
 
-if [[ $PATH =~ $(pwd) ]]; then # exit if PWD is in PATH
+if [[ $PATH =~ $(pwd) ]]; then # check if PWD is in PATH
 	echo -e "This directory is already in the path."
-	#rm $SELF
-else # add to PATH depending on different shells
-	#if [[ $SHELL =~ "bash" ]];
-	#	echo "export PATH=$PATH:/$(pwd)" > ~.bashrc
-	export PATH=$PATH:/$(pwd)
-	echo "ADDING TO PATH!"
-#rm $SELF
+else # else: add to PATH depending on different shells
+	if [[ $SHELL =~ "bash" ]]; then
+		echo "Adding PATH to .bashrc!"
+		echo "export PATH=$PATH:/$(pwd)" >> ~.bashrc
+	fi
+	if [[ $SHELL =~ "fish" ]]; then
+		echo "Adding PATH to fish_user_paths!"
+		echo "set PATH $PATH ", $(pwd) >> ~/.config/fish/config.fish
+	fi
 fi
+
+# get confirmation to delete the installer
+read -p "Done. Do you want to delete the installer? [y/n]? " ANSWER
+
+if [[ $ANSWER = "y" ]] || [[ $ANSWER = "Y" ]]; then
+	rm $SELF
+fi
+
