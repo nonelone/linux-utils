@@ -1,0 +1,14 @@
+#!/bin/bash
+
+SELF=$0
+
+if [[ $PATH =~ $(pwd) ]]; then # exit if PWD is in PATH
+	echo -e "This directory is already in the path."
+	#rm $SELF
+else # add to PATH depending on different shells
+	#if [[ $SHELL =~ "bash" ]];
+	#	echo "export PATH=$PATH:/$(pwd)" > ~.bashrc
+	export PATH=$PATH:/$(pwd)
+	echo "ADDING TO PATH!"
+#rm $SELF
+fi

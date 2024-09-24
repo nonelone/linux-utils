@@ -1,0 +1,15 @@
+#!/bin/bash
+# minimal wrapper for cat that encapsulates output in discord's code block
+if [ "$1" = "-h" ]; then # help section
+	echo -e "This is a minimal wrapper for cat.\nIt encapsulates output in \`\`\` blocks.\nUsage:\n\tcatcord (command / file) to output to the console\n\tcatcord -c (command / file) to copy to the clipboard"
+	exit
+fi
+
+if [ "$1" = "-c" ]; then # clipboard output
+	OUTPUT="\`\`\`$(cat $2)\`\`\`"
+	echo $OUTPUT | xclip -selection clipboard
+	echo "Copied!"
+else # console output
+	OUTPUT="\`\`\`$(cat $1)\`\`\`"
+	echo $OUTPUT
+fi
