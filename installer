@@ -7,11 +7,11 @@ if [[ $PATH =~ $(pwd) ]]; then # check if PWD is in PATH
 else # else: add to PATH depending on different shells
 	if [[ $SHELL =~ "bash" ]]; then
 		echo "Adding PATH to .bashrc!"
-		echo "export PATH=\$PATH:/$(pwd)" >> ~.bashrc
+		echo -e "#Added by Linux-utils installer @ $(date)\nexport PATH=\$PATH:/$(pwd)" >> ~.bashrc
 	fi
 	if [[ $SHELL =~ "fish" ]]; then
 		echo "Adding PATH to fish_user_paths!"
-		echo "set PATH \$PATH $(pwd)" # >> ~/.config/fish/config.fish
+		echo -e "#Added by Linux-utils installer @ $(date)\nset PATH \$PATH $(pwd)" # >> ~/.config/fish/config.fish
 	fi
 fi
 

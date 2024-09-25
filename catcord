@@ -13,3 +13,5 @@ else # console output
 	OUTPUT="\`\`\`$(cat $1)\`\`\`"
 	echo $OUTPUT
 fi
+
+exit
